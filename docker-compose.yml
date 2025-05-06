@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  api:
+    build: ./services/api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./services/api:/app
+    environment:
+      - NODE_ENV=development
+  # Add more services (e.g., db, redis) as needed
