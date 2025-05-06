@@ -1,0 +1,1 @@
+- I know basic coding like loops and if else statement but do not know the complexities of development so explain every code that you generate.

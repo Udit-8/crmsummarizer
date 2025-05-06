@@ -1,0 +1,11 @@
+# Task ID: 16
+# Title: Build Notification System
+# Status: pending
+# Dependencies: 2, 11, 14
+# Priority: medium
+# Description: Develop a notification system to alert agents to new summaries, urgent issues, or pending actions.
+# Details:
+Implement notification service with multiple channels (in-app, email, mobile push). Create notification rules engine based on priority and user preferences. Develop real-time notification delivery using WebSockets. Implement notification management UI (read/unread, dismiss, snooze). Create notification templates for different alert types. Add notification batching to prevent overwhelming users.
+
+# Test Strategy:
+Unit tests for notification generation logic, integration tests for delivery channels, end-to-end tests for complete notification flow, and UI testing for notification management.

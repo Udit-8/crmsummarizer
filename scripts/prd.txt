@@ -1,0 +1,58 @@
+<context>
+# Overview  
+CRM Summarizer is an AI-powered tool that ingests, summarizes, and analyzes customer interactions (chats, calls, emails) from HubSpot CRM. It provides actionable insights and next-step recommendations to customer-facing teams, improving efficiency, customer satisfaction, and follow-through. The system is designed to be extensible for future integration with additional CRM platforms.
+
+# Core Features  
+- Multi-Channel Integration: Connect to chat logs, call transcripts, emails, and CRM notes from HubSpot (and other CRMs in the future).
+- Real-Time Data Sync: Automatically fetch new conversations and updates from the CRM.
+- User Identification: Link conversations to the correct customer profile.
+- Automatic Summaries: Generate concise, accurate summaries of each interaction.
+- Highlight Key Points: Extract and display main topics, questions, and customer concerns.
+- Sentiment Analysis: Detect and display the customer's mood or satisfaction level.
+- Intent Detection: Identify the customer's main goals, requests, or problems.
+- Entity Extraction: Pull out important details (e.g., product names, order numbers, dates).
+- Suggested Actions: Recommend next steps for agents (e.g., follow-up, escalate, send info).
+- Task Creation: Automatically create tasks or reminders in the CRM based on conversation content.
+- Priority Assessment: Flag urgent issues or high-value opportunities.
+- Response Suggestions: Offer draft replies or talking points for agents.
+- Knowledge Base Integration: Suggest relevant help articles or solutions.
+- Reporting & Analytics: Analyze conversation trends, agent performance, and customer satisfaction.
+- Dashboard: Central place to view summaries, insights, and next steps for each customer.
+- Search & Filter: Find conversations by customer, topic, sentiment, or date.
+- Notifications: Alert agents to new summaries, urgent issues, or pending actions.
+- Data Privacy & Compliance: Ensure sensitive information is protected and access-controlled.
+- Custom Rules & API Access: Allow admins to define custom triggers, summary formats, and integrate with other tools.
+- Language Support: Handle multiple languages if your customer base is international.
+
+# User Experience  
+- User Personas: Customer service agents, sales reps, managers, admins, compliance officers.
+- Key User Flows: Agent logs in, reviews summarized conversations, receives suggested actions, marks tasks as complete, manager reviews analytics, admin configures rules.
+- UI/UX Considerations: Clean dashboard, easy navigation, clear action items, real-time updates, accessible search/filter, notifications for urgent items.
+</context>
+<PRD>
+# Technical Architecture  
+- System Components: Data ingestion service, summarization/AI engine, action recommendation engine, dashboard UI, CRM integration layer, analytics module.
+- Data Models: Customer, Conversation, Summary, Action, Task, Sentiment, Entity.
+- APIs and Integrations: HubSpot CRM API (initial), modular integration layer for future CRMs, knowledge base API, notification service.
+- Infrastructure Requirements: Cloud-based, scalable, secure storage, support for real-time and batch processing.
+
+# Development Roadmap  
+- MVP Requirements: HubSpot integration, conversation ingestion, summarization, action suggestions, dashboard, basic analytics, user authentication, notifications, data privacy controls.
+- Future Enhancements: Multi-CRM support, advanced analytics, predictive insights, voice analysis, customer journey mapping, customizable rules, multi-language support, deeper knowledge base integration.
+
+# Logical Dependency Chain
+- Foundation: Set up data ingestion and CRM integration (HubSpot), user authentication, and storage.
+- Core: Implement summarization engine, action recommendation, and dashboard UI.
+- Usability: Add analytics, notifications, and search/filter features.
+- Extensibility: Build modular integration layer for additional CRMs, add customization and API access.
+- Enhancement: Add advanced features (voice analysis, predictive analytics, etc.).
+
+# Risks and Mitigations  
+- Technical challenges: Complex CRM APIs, data consistency, real-time processing. Mitigation: Start with HubSpot, modularize integration, use robust error handling.
+- MVP scope: Risk of over-engineering. Mitigation: Focus on core summarization and action features for MVP.
+- Resource constraints: Limited dev resources. Mitigation: Prioritize features, use agile sprints, leverage existing libraries/services.
+
+# Appendix  
+- Research findings: Review of existing CRM summarization tools, user interviews, HubSpot API documentation.
+- Technical specifications: See data model and API integration notes above.
+</PRD> 

@@ -1,0 +1,11 @@
+# Task ID: 9
+# Title: Build Entity and Key Point Extraction
+# Status: pending
+# Dependencies: 7
+# Priority: medium
+# Description: Develop functionality to extract important entities (product names, order numbers, dates) and highlight key points from customer interactions.
+# Details:
+Implement named entity recognition (NER) using NLP services or custom models. Create custom entity extractors for domain-specific items. Develop key point extraction algorithm based on semantic importance. Implement confidence scoring for extracted entities. Create UI components to display entities and key points. Develop feedback mechanism to improve extraction accuracy.
+
+# Test Strategy:
+Unit tests for extraction algorithms, integration tests with sample conversations, precision/recall evaluation against human-labeled data, and UI component testing.
