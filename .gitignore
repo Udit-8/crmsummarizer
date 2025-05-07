@@ -1,6 +1,6 @@
 node_modules/
 # Terraform
-infra/.terraform/
+.terraform/
 *.tfstate
 *.tfstate.backup
 
