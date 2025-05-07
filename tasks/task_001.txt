@@ -76,7 +76,7 @@ Docker containerization has been successfully implemented for the project. A sam
 ### Details:
 Configure CI/CD tool (GitHub Actions, GitLab CI, Jenkins, or CircleCI). Create pipeline stages for linting, testing, building, and deploying. Set up environment-specific configurations and secrets. Implement automated testing in the pipeline. Configure deployment strategies (blue/green, canary) for production. Set up approval gates for production deployments.
 
-## 4. Provision Cloud Infrastructure with IaC [pending]
+## 4. Provision Cloud Infrastructure with IaC [done]
 ### Dependencies: 1.1
 ### Description: Set up cloud infrastructure using Infrastructure as Code (Terraform, CloudFormation, or Pulumi) for development, staging, and production environments.
 ### Details:
@@ -87,4 +87,28 @@ Choose and configure IaC tool (Terraform recommended). Create modules for networ
 ### Description: Implement comprehensive monitoring and logging solutions for observability across all environments and services.
 ### Details:
 Set up centralized logging system (ELK Stack, CloudWatch, or Stackdriver). Configure log aggregation from all services. Implement monitoring system (Prometheus, Grafana, Datadog) with appropriate metrics collection. Create dashboards for key performance indicators. Set up alerting for critical issues with appropriate notification channels. Configure distributed tracing (Jaeger, Zipkin) for request flow visualization. Implement health checks and readiness probes for all services.
+<info added on 2025-05-07T14:20:13.022Z>
+This subtask will be implemented in phases, aligned with project growth:
+
+Phase 1 (Current State):
+- Basic logging with Winston has been implemented for initial services
+- Local log collection and viewing only
+
+Phase 2 (Near-term):
+- Extend Winston logging across all new services with consistent format
+- Implement basic health checks and readiness probes
+- Set up simple local monitoring dashboard
+
+Phase 3 (As project scales):
+- Set up centralized logging system (ELK Stack, CloudWatch, or Stackdriver)
+- Configure log aggregation from all services
+- Implement monitoring system (Prometheus, Grafana, Datadog) with appropriate metrics collection
+- Create dashboards for key performance indicators
+- Set up alerting for critical issues with appropriate notification channels
+
+Phase 4 (Advanced - when multiple services deployed):
+- Configure distributed tracing (Jaeger, Zipkin) for request flow visualization
+- Implement advanced health checks and readiness probes for all services
+- Set up cross-service monitoring and correlation
+</info added on 2025-05-07T14:20:13.022Z>
 
