@@ -1,11 +1,7 @@
 node_modules/
 # Terraform
-.terraform/
+infra/.terraform/
 *.tfstate
 *.tfstate.backup
 
-# macOS
-.DS_Store.terraform/
-*.tfstate
-*.tfstate.backup
 .DS_Store
