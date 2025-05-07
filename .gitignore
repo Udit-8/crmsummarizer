@@ -5,4 +5,7 @@ node_modules/
 *.tfstate.backup
 
 # macOS
+.DS_Store.terraform/
+*.tfstate
+*.tfstate.backup
 .DS_Store
