@@ -8,4 +8,22 @@ services:
       - ./services/api:/app
     environment:
       - NODE_ENV=development
+            - DATABASE_URL=postgresql://udit:uditrai88@postgres:5432/crmsummarizer
+    depends_on:
+      - postgres
   # Add more services (e.g., db, redis) as needed
+  postgres:
+    image: postgres:15
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: udit
+      POSTGRES_PASSWORD: uditrai88
+      POSTGRES_DB: crmsummarizer
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

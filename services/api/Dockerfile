@@ -1,15 +1,12 @@
    # Use official Node.js LTS image
    FROM node:18-alpine
 
-   # Set working directory
-   WORKDIR /app
-
-   # Copy package.json and install dependencies
-   COPY package.json ./
+   # working directory should be services/api
+   WORKDIR /services/api
+   COPY package*.json ./
    RUN npm install
-
-   # Copy the rest of the code
    COPY . .
+   RUN npx prisma generate
 
    # Expose port (e.g., 3000)
    EXPOSE 3000
