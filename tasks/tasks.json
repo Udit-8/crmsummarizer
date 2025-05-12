@@ -85,7 +85,7 @@
           "description": "Design and implement the user data model with role-based access control (RBAC) that supports different user roles (agents, managers, admins, compliance officers).",
           "dependencies": [],
           "details": "Create a User schema with fields for authentication (email, password hash, salt) and role information. Implement permission sets for each role type. Define role hierarchies and inheritance patterns. Ensure the model supports future extensibility for new roles or permissions. Include audit fields like created/updated timestamps.",
-          "status": "pending",
+          "status": "done",
           "testStrategy": "Unit tests for model validation, role assignment, and permission checks. Test edge cases like role changes and permission inheritance."
         },
         {
