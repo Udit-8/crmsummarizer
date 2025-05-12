@@ -1,17 +1,27 @@
+/**
+ * Token Service
+ * Manages JWT token generation, validation, and revocation
+ */
+
 const jwt = require('jsonwebtoken');
-const { PrismaClient } = require('@prisma/client');
 const jwtConfig = require('../config/jwt');
 
-const prisma = new PrismaClient();
-const tokenBlacklist = new Set(); // For development; use Redis in production
+// In-memory token blacklist (use Redis for production)
+const tokenBlacklist = new Set();
 
 const tokenService = {
-  // Generate access token
-  generateAccessToken(user) {
+  /**
+   * Generate access token for user
+   * @param {Object} user - User object
+   * @param {string} sessionId - Optional session ID
+   * @returns {string} JWT access token
+   */
+  generateAccessToken(user, sessionId) {
     const payload = {
       id: user.id,
       email: user.email,
       role: user.role,
+      sessionId: sessionId || null
     };
     
     return jwt.sign(payload, jwtConfig.accessTokenSecret, {
@@ -19,11 +29,17 @@ const tokenService = {
     });
   },
   
-  // Generate refresh token
-  generateRefreshToken(user) {
+  /**
+   * Generate refresh token for user
+   * @param {Object} user - User object
+   * @param {string} sessionId - Optional session ID
+   * @returns {string} JWT refresh token
+   */
+  generateRefreshToken(user, sessionId) {
     const payload = {
       id: user.id,
       tokenVersion: user.tokenVersion || 0, // For token revocation
+      sessionId: sessionId || null
     };
     
     return jwt.sign(payload, jwtConfig.refreshTokenSecret, {
@@ -31,7 +47,11 @@ const tokenService = {
     });
   },
   
-  // Verify access token
+  /**
+   * Verify access token
+   * @param {string} token - JWT access token
+   * @returns {Object} Decoded token payload
+   */
   verifyAccessToken(token) {
     try {
       if (tokenBlacklist.has(token)) {
@@ -44,7 +64,11 @@ const tokenService = {
     }
   },
   
-  // Verify refresh token
+  /**
+   * Verify refresh token
+   * @param {string} token - JWT refresh token
+   * @returns {Object} Decoded token payload
+   */
   verifyRefreshToken(token) {
     try {
       return jwt.verify(token, jwtConfig.refreshTokenSecret);
@@ -53,13 +77,20 @@ const tokenService = {
     }
   },
   
-  // Revoke token (add to blacklist)
+  /**
+   * Revoke token (add to blacklist)
+   * @param {string} token - JWT token to revoke
+   * @returns {boolean} Success status
+   */
   revokeToken(token) {
     tokenBlacklist.add(token);
     return true;
   },
   
-  // Clear expired tokens from blacklist (called periodically)
+  /**
+   * Clear expired tokens from blacklist
+   * @returns {boolean} Success status
+   */
   clearExpiredTokens() {
     // In production, use Redis with TTL (time-to-live)
     // This is a simplified version for development

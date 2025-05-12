@@ -1,5 +1,5 @@
 const { PrismaClient } =  require('@prisma/client')
-const { hashPassword, verifyPassword } = require('../utils/auth');
+const { hashPassword, verifyPassword } = require('../utils/passwordUtils');
 const { hasPermission, hasPermissionWithInheritance, getAllPermissions } = require('../utils/permissions');
 
 const prisma = new PrismaClient();

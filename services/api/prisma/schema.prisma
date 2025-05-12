@@ -10,6 +10,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+//Session shema
+model Session {
+  id            String    @id @default(uuid())
+  userId        Int
+  ipAddress     String?
+  userAgent     String?
+  device        String?
+  browser       String?
+  os            String?
+  location      String?
+  isActive      Boolean   @default(true)
+  lastActivity  DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 
 // Add to existing User model
 model User {
@@ -23,6 +39,7 @@ model User {
   tokenVersion  Int      @default(0) // For token revocation
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  sessions      Session[]
 }
 
 enum Role {

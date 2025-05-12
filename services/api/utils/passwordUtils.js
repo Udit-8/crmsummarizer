@@ -11,19 +11,8 @@ async function hashPassword(password) {
 async function verifyPassword(password, hash) {
   return await bcrypt.compare(password, hash);
 }
-//create a authenticateToken function jwt
-async function authenticateToken(req, res, next) {
-  const token = req.cookies.token;
-  if (!token) return res.status(401).json({ error: 'Unauthorized' });
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) return res.status(401).json({ error: 'Unauthorized' });
-    req.user = user;
-    next();
-  });
-}
 
 module.exports = {
   hashPassword,
-  verifyPassword,
-  authenticateToken
+  verifyPassword
 };

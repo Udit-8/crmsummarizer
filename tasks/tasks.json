@@ -96,7 +96,7 @@
             1
           ],
           "details": "Implement JWT token generation with appropriate claims (user ID, role, permissions). Set up secure token signing with RS256 algorithm. Create middleware for token validation and extraction. Implement token refresh logic with sliding expiration. Store token blacklist for revoked tokens. Configure CORS and security headers.",
-          "status": "pending",
+          "status": "done",
           "testStrategy": "Test token generation, validation, expiration, and refresh flows. Verify token security with penetration testing tools."
         },
         {
@@ -107,7 +107,7 @@
             2
           ],
           "details": "Implement login endpoint with credential validation. Create logout endpoint that invalidates tokens. Develop session tracking with device information. Add rate limiting for failed login attempts. Implement IP-based suspicious activity detection. Create session timeout mechanisms based on inactivity.",
-          "status": "pending",
+          "status": "done",
           "testStrategy": "Integration tests for login/logout flows. Test concurrent sessions, session timeouts, and rate limiting functionality."
         },
         {

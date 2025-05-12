@@ -17,13 +17,13 @@ Unit tests for authentication logic, integration tests for API endpoints, securi
 ### Details:
 Create a User schema with fields for authentication (email, password hash, salt) and role information. Implement permission sets for each role type. Define role hierarchies and inheritance patterns. Ensure the model supports future extensibility for new roles or permissions. Include audit fields like created/updated timestamps.
 
-## 2. Implement JWT Authentication and Token Management [pending]
+## 2. Implement JWT Authentication and Token Management [done]
 ### Dependencies: 2.1
 ### Description: Develop the JWT-based authentication system with secure token generation, validation, and refresh mechanisms.
 ### Details:
 Implement JWT token generation with appropriate claims (user ID, role, permissions). Set up secure token signing with RS256 algorithm. Create middleware for token validation and extraction. Implement token refresh logic with sliding expiration. Store token blacklist for revoked tokens. Configure CORS and security headers.
 
-## 3. Develop Login/Logout Functionality with Session Management [pending]
+## 3. Develop Login/Logout Functionality with Session Management [done]
 ### Dependencies: 2.2
 ### Description: Create the authentication endpoints and session management system for user login, logout, and session tracking.
 ### Details:
