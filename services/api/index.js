@@ -6,6 +6,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const hubspotAuthRoutes = require('./routes/hubspot/authRoutes');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -73,6 +74,7 @@ app.use('/api', (req, res, next) => {
 
 // API routes
 app.use('/api/auth', authRoutes);
+app.use('/api/hubspot', hubspotAuthRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {

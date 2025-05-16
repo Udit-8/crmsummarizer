@@ -78,7 +78,64 @@
         1
       ],
       "status": "pending",
-      "subtasks": []
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Create User Model with Role-Based Permissions",
+          "description": "Design and implement the user data model with role-based access control (RBAC) that supports different user roles (agents, managers, admins, compliance officers).",
+          "dependencies": [],
+          "details": "Create a User schema with fields for authentication (email, password hash, salt) and role information. Implement permission sets for each role type. Define role hierarchies and inheritance patterns. Ensure the model supports future extensibility for new roles or permissions. Include audit fields like created/updated timestamps.",
+          "status": "done",
+          "testStrategy": "Unit tests for model validation, role assignment, and permission checks. Test edge cases like role changes and permission inheritance."
+        },
+        {
+          "id": 2,
+          "title": "Implement JWT Authentication and Token Management",
+          "description": "Develop the JWT-based authentication system with secure token generation, validation, and refresh mechanisms.",
+          "dependencies": [
+            1
+          ],
+          "details": "Implement JWT token generation with appropriate claims (user ID, role, permissions). Set up secure token signing with RS256 algorithm. Create middleware for token validation and extraction. Implement token refresh logic with sliding expiration. Store token blacklist for revoked tokens. Configure CORS and security headers.",
+          "status": "done",
+          "testStrategy": "Test token generation, validation, expiration, and refresh flows. Verify token security with penetration testing tools."
+        },
+        {
+          "id": 3,
+          "title": "Develop Login/Logout Functionality with Session Management",
+          "description": "Create the authentication endpoints and session management system for user login, logout, and session tracking.",
+          "dependencies": [
+            2
+          ],
+          "details": "Implement login endpoint with credential validation. Create logout endpoint that invalidates tokens. Develop session tracking with device information. Add rate limiting for failed login attempts. Implement IP-based suspicious activity detection. Create session timeout mechanisms based on inactivity.",
+          "status": "done",
+          "testStrategy": "Integration tests for login/logout flows. Test concurrent sessions, session timeouts, and rate limiting functionality."
+        },
+        {
+          "id": 4,
+          "title": "Implement Password Security and Account Recovery",
+          "description": "Develop secure password handling with hashing, validation, and account recovery mechanisms including MFA support.",
+          "dependencies": [
+            1
+          ],
+          "details": "Implement password hashing using bcrypt with appropriate work factor. Create password policy enforcement (complexity, history, expiration). Develop password reset flow with secure tokens. Implement Multi-Factor Authentication (MFA) using TOTP. Create account recovery workflows with verification steps.\n<info added on 2025-05-12T15:09:01.062Z>\nImplement password hashing using bcrypt with appropriate work factor. Create password policy enforcement (complexity, history, expiration). Develop password reset flow with secure tokens. Implement Multi-Factor Authentication (MFA) using TOTP. Create account recovery workflows with verification steps.\n\nImplementation Plan:\n\n1. Enhanced Password Hashing and Validation:\n   - Use bcryptjs with work factor 12\n   - Implement password complexity validation (min 8 chars, require mixed case, numbers, symbols)\n   - Create password policy utilities and validators\n\n2. Password Policy Enforcement:\n   - Track password history in the User model\n   - Add password expiration settings (90 days recommended)\n   - Prevent reuse of last 5 passwords\n   - Create middleware for password expiration checks\n\n3. Password Reset Flow:\n   - Generate time-limited JWT tokens for password reset (15 min expiry)\n   - Create email templates for reset notifications\n   - Implement rate limiting on reset requests (max 3 per hour)\n   - Add logging for all reset attempts\n\n4. Multi-Factor Authentication (MFA):\n   - Use speakeasy for TOTP implementation\n   - Generate QR codes with qrcode package\n   - Store encrypted TOTP secrets in the database\n   - Add MFA verification step to login flow\n\n5. Account Recovery Mechanisms:\n   - Implement security questions (store hashed answers)\n   - Generate one-time recovery codes\n   - Add backup email verification option\n   - Create audit trail for all recovery attempts\n\nRequired Packages:\n- bcryptjs (already in use)\n- speakeasy (for TOTP)\n- qrcode (for QR code generation)\n- nodemailer (for emails)\n- zxcvbn (for password strength estimation)\n\nDatabase Schema Updates:\n- Add passwordHistory, passwordLastChanged fields\n- Add mfaEnabled, mfaSecret, mfaBackupCodes fields\n- Add recoveryEmail, recoveryQuestions fields\n\nAPI Endpoints:\n- POST /api/auth/password/reset-request\n- POST /api/auth/password/reset\n- POST /api/auth/mfa/enable\n- POST /api/auth/mfa/verify\n- POST /api/auth/mfa/disable\n- POST /api/auth/recovery/setup\n- POST /api/auth/recovery/verify\n</info added on 2025-05-12T15:09:01.062Z>",
+          "status": "pending",
+          "testStrategy": "Test password hashing security, reset flows, and MFA enrollment/verification. Verify account recovery processes with security testing."
+        },
+        {
+          "id": 5,
+          "title": "Create User Management API Endpoints",
+          "description": "Develop the API endpoints for user management operations with appropriate access controls based on user roles.",
+          "dependencies": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "details": "Implement CRUD operations for user accounts with role-based access controls. Create endpoints for user profile management. Develop admin interfaces for user management. Implement audit logging for all user operations. Add endpoints for role/permission management. Ensure all endpoints follow security best practices and validate input thoroughly.",
+          "status": "pending",
+          "testStrategy": "API integration tests for all endpoints. Test authorization rules for different roles. Verify input validation and error handling."
+        }
+      ]
     },
     {
       "id": 3,

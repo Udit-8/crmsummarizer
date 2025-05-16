@@ -34,6 +34,61 @@ Implement login endpoint with credential validation. Create logout endpoint that
 ### Description: Develop secure password handling with hashing, validation, and account recovery mechanisms including MFA support.
 ### Details:
 Implement password hashing using bcrypt with appropriate work factor. Create password policy enforcement (complexity, history, expiration). Develop password reset flow with secure tokens. Implement Multi-Factor Authentication (MFA) using TOTP. Create account recovery workflows with verification steps.
+<info added on 2025-05-12T15:09:01.062Z>
+Implement password hashing using bcrypt with appropriate work factor. Create password policy enforcement (complexity, history, expiration). Develop password reset flow with secure tokens. Implement Multi-Factor Authentication (MFA) using TOTP. Create account recovery workflows with verification steps.
+
+Implementation Plan:
+
+1. Enhanced Password Hashing and Validation:
+   - Use bcryptjs with work factor 12
+   - Implement password complexity validation (min 8 chars, require mixed case, numbers, symbols)
+   - Create password policy utilities and validators
+
+2. Password Policy Enforcement:
+   - Track password history in the User model
+   - Add password expiration settings (90 days recommended)
+   - Prevent reuse of last 5 passwords
+   - Create middleware for password expiration checks
+
+3. Password Reset Flow:
+   - Generate time-limited JWT tokens for password reset (15 min expiry)
+   - Create email templates for reset notifications
+   - Implement rate limiting on reset requests (max 3 per hour)
+   - Add logging for all reset attempts
+
+4. Multi-Factor Authentication (MFA):
+   - Use speakeasy for TOTP implementation
+   - Generate QR codes with qrcode package
+   - Store encrypted TOTP secrets in the database
+   - Add MFA verification step to login flow
+
+5. Account Recovery Mechanisms:
+   - Implement security questions (store hashed answers)
+   - Generate one-time recovery codes
+   - Add backup email verification option
+   - Create audit trail for all recovery attempts
+
+Required Packages:
+- bcryptjs (already in use)
+- speakeasy (for TOTP)
+- qrcode (for QR code generation)
+- nodemailer (for emails)
+- zxcvbn (for password strength estimation)
+
+Database Schema Updates:
+- Add passwordHistory, passwordLastChanged fields
+- Add mfaEnabled, mfaSecret, mfaBackupCodes fields
+- Add recoveryEmail, recoveryQuestions fields
+
+API Endpoints:
+- POST /api/auth/password/reset-request
+- POST /api/auth/password/reset
+- POST /api/auth/mfa/enable
+- POST /api/auth/mfa/verify
+- POST /api/auth/mfa/disable
+- POST /api/auth/recovery/setup
+- POST /api/auth/recovery/verify
+</info added on 2025-05-12T15:09:01.062Z>
 
 ## 5. Create User Management API Endpoints [pending]
 ### Dependencies: 2.1, 2.2, 2.3, 2.4

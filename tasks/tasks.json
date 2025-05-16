@@ -117,7 +117,7 @@
           "dependencies": [
             1
           ],
-          "details": "Implement password hashing using bcrypt with appropriate work factor. Create password policy enforcement (complexity, history, expiration). Develop password reset flow with secure tokens. Implement Multi-Factor Authentication (MFA) using TOTP. Create account recovery workflows with verification steps.",
+          "details": "Implement password hashing using bcrypt with appropriate work factor. Create password policy enforcement (complexity, history, expiration). Develop password reset flow with secure tokens. Implement Multi-Factor Authentication (MFA) using TOTP. Create account recovery workflows with verification steps.\n<info added on 2025-05-12T15:09:01.062Z>\nImplement password hashing using bcrypt with appropriate work factor. Create password policy enforcement (complexity, history, expiration). Develop password reset flow with secure tokens. Implement Multi-Factor Authentication (MFA) using TOTP. Create account recovery workflows with verification steps.\n\nImplementation Plan:\n\n1. Enhanced Password Hashing and Validation:\n   - Use bcryptjs with work factor 12\n   - Implement password complexity validation (min 8 chars, require mixed case, numbers, symbols)\n   - Create password policy utilities and validators\n\n2. Password Policy Enforcement:\n   - Track password history in the User model\n   - Add password expiration settings (90 days recommended)\n   - Prevent reuse of last 5 passwords\n   - Create middleware for password expiration checks\n\n3. Password Reset Flow:\n   - Generate time-limited JWT tokens for password reset (15 min expiry)\n   - Create email templates for reset notifications\n   - Implement rate limiting on reset requests (max 3 per hour)\n   - Add logging for all reset attempts\n\n4. Multi-Factor Authentication (MFA):\n   - Use speakeasy for TOTP implementation\n   - Generate QR codes with qrcode package\n   - Store encrypted TOTP secrets in the database\n   - Add MFA verification step to login flow\n\n5. Account Recovery Mechanisms:\n   - Implement security questions (store hashed answers)\n   - Generate one-time recovery codes\n   - Add backup email verification option\n   - Create audit trail for all recovery attempts\n\nRequired Packages:\n- bcryptjs (already in use)\n- speakeasy (for TOTP)\n- qrcode (for QR code generation)\n- nodemailer (for emails)\n- zxcvbn (for password strength estimation)\n\nDatabase Schema Updates:\n- Add passwordHistory, passwordLastChanged fields\n- Add mfaEnabled, mfaSecret, mfaBackupCodes fields\n- Add recoveryEmail, recoveryQuestions fields\n\nAPI Endpoints:\n- POST /api/auth/password/reset-request\n- POST /api/auth/password/reset\n- POST /api/auth/mfa/enable\n- POST /api/auth/mfa/verify\n- POST /api/auth/mfa/disable\n- POST /api/auth/recovery/setup\n- POST /api/auth/recovery/verify\n</info added on 2025-05-12T15:09:01.062Z>",
           "status": "pending",
           "testStrategy": "Test password hashing security, reset flows, and MFA enrollment/verification. Verify account recovery processes with security testing."
         },
@@ -148,7 +148,62 @@
         1
       ],
       "status": "pending",
-      "subtasks": []
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Implement OAuth2 Authentication with HubSpot",
+          "description": "Create authentication service to handle OAuth2 flow with HubSpot API, including token acquisition, refresh, and storage.",
+          "dependencies": [],
+          "details": "Implement OAuth2 client for HubSpot API authentication. Create secure token storage mechanism. Implement token refresh logic. Add configuration for client ID, client secret, and scopes. Create authentication middleware for API requests. Document authentication flow for developers.",
+          "status": "pending",
+          "testStrategy": "Unit tests for token validation and refresh logic. Integration test with HubSpot sandbox environment. Security audit of token storage."
+        },
+        {
+          "id": 2,
+          "title": "Develop HubSpot API Client with Rate Limiting",
+          "description": "Create a robust API client for HubSpot that handles rate limiting, retries, error handling, and logging.",
+          "dependencies": [
+            1
+          ],
+          "details": "Implement base API client with request/response handling. Add rate limiting based on HubSpot API quotas. Implement exponential backoff for retries. Create comprehensive error handling with appropriate error types. Add detailed logging for debugging. Implement circuit breaker pattern for API stability.",
+          "status": "pending",
+          "testStrategy": "Unit tests for retry logic and rate limiting. Mock API responses for error scenarios. Performance testing under high load conditions."
+        },
+        {
+          "id": 3,
+          "title": "Create Data Fetching Endpoints for HubSpot Entities",
+          "description": "Develop service endpoints to fetch and manage HubSpot entities including contacts, companies, deals, tickets, and conversation data.",
+          "dependencies": [
+            2
+          ],
+          "details": "Implement endpoints for contacts CRUD operations. Create endpoints for companies, deals, and tickets. Develop conversation data retrieval for chat logs, call transcripts, and emails. Add filtering, pagination, and sorting capabilities. Implement batch operations where supported by HubSpot API. Create comprehensive documentation for each endpoint.",
+          "status": "pending",
+          "testStrategy": "Integration tests with HubSpot sandbox. Unit tests for endpoint logic. API contract tests to ensure consistent responses."
+        },
+        {
+          "id": 4,
+          "title": "Implement Webhook Handlers for Real-time Updates",
+          "description": "Create webhook handlers to receive and process real-time updates from HubSpot for various entity changes.",
+          "dependencies": [
+            3
+          ],
+          "details": "Set up webhook endpoint infrastructure with authentication. Implement handlers for contact, company, deal, and ticket updates. Create handlers for conversation events. Add webhook subscription management. Implement event queuing system for processing updates. Create monitoring and alerting for webhook failures.",
+          "status": "pending",
+          "testStrategy": "Unit tests for webhook payload processing. Integration tests with HubSpot webhook simulator. Load testing for high-volume webhook scenarios."
+        },
+        {
+          "id": 5,
+          "title": "Develop Data Transformation and Caching Layer",
+          "description": "Create a data transformation layer to normalize HubSpot data to internal models and implement caching strategy to minimize API calls.",
+          "dependencies": [
+            3,
+            4
+          ],
+          "details": "Design and implement data mappers for all HubSpot entities. Create normalization logic for consistent internal data models. Implement caching strategy with Redis or similar technology. Add cache invalidation based on webhook events. Create metrics for cache hit/miss rates. Optimize query patterns to minimize API calls. Implement background jobs for cache warming.",
+          "status": "pending",
+          "testStrategy": "Unit tests for data transformation logic. Performance testing of caching layer. Integration tests for cache invalidation scenarios."
+        }
+      ]
     },
     {
       "id": 4,
